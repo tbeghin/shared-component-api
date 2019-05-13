@@ -28,6 +28,7 @@ const ConfigurationServer: ConfigFunction =
         app.use(swagger.express(
             {
                 definition: {
+                    basePath: '/api/v1',
                     info: {
                         title: packageJson.name,
                         version: packageJson.version

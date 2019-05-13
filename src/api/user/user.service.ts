@@ -10,22 +10,23 @@ export class UserService {
     }
 
     public getUsers(): Promise<User[]> {
-        return this.mongoClient.find<User>('user', {});
+        console.log('getUsers');
+        return this.mongoClient.find<User>('users', {});
     }
 
     public getUser(id: string): Promise<User> {
-        return this.mongoClient.findOneById<User>('user', id);
+        return this.mongoClient.findOneById<User>('users', id);
     }
 
     public newUser(user: User): Promise<boolean> {
-        return this.mongoClient.insert<User>('user', user);
+        return this.mongoClient.insert<User>('users', user);
     }
 
     public updateUser(id: string, user: User): Promise<boolean> {
-        return this.mongoClient.update<User>('user', id, user);
+        return this.mongoClient.update<User>('users', id, user);
     }
 
     public deleteUser(id: string): Promise<boolean> {
-        return this.mongoClient.remove('user', id);
+        return this.mongoClient.remove('users', id);
     }
 }

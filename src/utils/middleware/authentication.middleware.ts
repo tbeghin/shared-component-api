@@ -16,7 +16,7 @@ export class AuthenticationMiddleware extends BaseMiddleware {
         res: Response,
         next: NextFunction
     ) {
-        const token = req.header("");
+        const token = req.header("Authorization");
         if (this.authenticateService.verifyAuth(token)) {
             next();
         } else {

@@ -14,7 +14,7 @@ export class AuthenticateService {
 
     public authenticate(model: Authenticate): Promise<User> {
         return new Promise((resolve, reject) => {
-            this.mongoClient.find<User>('user', {username: model.username, password: model.password})
+            this.mongoClient.find<User>('users', {username: model.username, password: model.password})
                 .then(
                     (users: Array<User>) => {
                         const user = users[0];
@@ -28,6 +28,7 @@ export class AuthenticateService {
     }
 
     public verifyAuth(token: string): Promise<boolean> {
+        token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2Q1OTEyM2NjMjE2ODI0MjgzODBmNjIiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0b3RvIiwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTU1Nzc0ODE5MywiZXhwIjoxNTU3NzUxNzkzfQ.wxUxI-xYfctnDz0eA0oSf7wFY8ufyF9ZHxrOYiOT4lk';
         const isAuth = jwt.verify(token, JsonWebToken.secret);
         return new Promise<boolean>((resolve, reject) => {
             resolve(true)

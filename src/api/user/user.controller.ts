@@ -10,7 +10,7 @@ import {AuthenticationMiddleware} from "../../utils/middleware/authentication.mi
     name: "User",
     security: {basicAuth: []}
 })
-@controller('/')
+@controller('/user')
 export class UserController extends BaseHttpController {
     constructor(@inject(UserService) private userService: UserService){
         super();

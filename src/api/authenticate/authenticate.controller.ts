@@ -30,7 +30,7 @@ export class AuthenticateController extends BaseHttpController {
             apiKeyHeader: []
         }
     })
-    @httpPost('/authenticate')
+    @httpPost('/')
     public async post(@requestBody() request: Authenticate): Promise<JsonResult> {
         return this.json(await this.authenticateService.authenticate(request));
     }
