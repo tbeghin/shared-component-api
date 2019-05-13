@@ -11,22 +11,13 @@ import './api/user/user.controller';
 import ConfigurationServer from './configuration/application';
 import {User} from './api/user/user';
 import {Authenticate} from './api/authenticate/authenticate';
-import {AuthenticationMiddleware} from './utils/middleware/authentication.middleware';
-import TYPES from './utils/constant/types';
-import {MongoDBClient} from './utils/mongodb/client';
-import {UserService} from './api/user/user.service';
-import {MongoDBConnection} from './utils/mongodb/connection';
-import {AuthenticateService} from './api/authenticate/authenticate.service';
+import {buildProviderModule} from "inversify-binding-decorators";
 
 // set up container
 let container = new Container();
+container.load(buildProviderModule());
 
 // set up bindings
-container.bind<MongoDBClient>(TYPES.MongoDBClient).to(MongoDBClient);
-container.bind<MongoDBConnection>(TYPES.MongoDBConnection).to(MongoDBConnection);
-container.bind<UserService>(TYPES.UserService).to(UserService);
-container.bind<AuthenticateService>(TYPES.AuthenticateService).to(AuthenticateService);
-container.bind<AuthenticationMiddleware>(TYPES.AuthenticationMiddleware).to(AuthenticationMiddleware);
 Reflect.getMetadata('design:type', Authenticate, 'Authenticate');
 Reflect.getMetadata('design:type', User, 'User');
 

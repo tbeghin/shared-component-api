@@ -1,7 +1,6 @@
 import {BaseHttpController, controller, httpPost, requestBody} from "inversify-express-utils";
 import {ApiOperationPost, ApiPath, SwaggerDefinitionConstant} from "swagger-express-ts";
 import {inject} from "inversify";
-import TYPES from "../../utils/constant/types";
 import {AuthenticateService} from "./authenticate.service";
 import {Authenticate} from "./authenticate";
 import JsonResult from "inversify-express-utils/dts/results/JsonResult";
@@ -13,7 +12,10 @@ import JsonResult from "inversify-express-utils/dts/results/JsonResult";
 })
 @controller('/authenticate')
 export class AuthenticateController extends BaseHttpController {
-    @inject(TYPES.AuthenticateService) private authenticateService: AuthenticateService;
+    constructor(@inject(AuthenticateService) private authenticateService: AuthenticateService) {
+        super();
+        console.log('AuthenticateController constructor');
+    }
 
     @ApiOperationPost({
         description: "Post user to receive JWT",

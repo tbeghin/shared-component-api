@@ -1,12 +1,16 @@
 import {BaseMiddleware} from "inversify-express-utils";
-import {inject, injectable} from "inversify";
-import TYPES from "../constant/types";
+import {inject} from "inversify";
 import {NextFunction, Request, Response} from "express";
 import {AuthenticateService} from "../../api/authenticate/authenticate.service";
+import {fluentProvide} from 'inversify-binding-decorators';
 
-@injectable()
+@fluentProvide(AuthenticationMiddleware).inSingletonScope().done()
 export class AuthenticationMiddleware extends BaseMiddleware {
-    @inject(TYPES.AuthenticateService) private authenticateService: AuthenticateService;
+    constructor(@inject(AuthenticateService) private authenticateService: AuthenticateService) {
+        super();
+        console.log('AuthenticationMiddleware constructor');
+    }
+
     public handler(
         req: Request,
         res: Response,

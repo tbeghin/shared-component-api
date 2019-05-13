@@ -1,16 +1,15 @@
 import {Db, ObjectID} from 'mongodb';
-import {inject, injectable} from 'inversify';
+import {inject} from 'inversify';
 import {MongoDBConnection} from './connection';
-import TYPES from '../constant/types';
+import {fluentProvide} from 'inversify-binding-decorators';
 
-@injectable()
+@fluentProvide(MongoDBClient).inSingletonScope().done()
 export class MongoDBClient {
     private database: Db;
-    @inject(TYPES.MongoDBConnection) mongoDBConnection: MongoDBConnection;
 
-    constructor() {
+    constructor(@inject(MongoDBConnection) mongoDBConnection: MongoDBConnection) {
         console.log('MongoDBClient constructor');
-        this.database = this.mongoDBConnection.database;
+        this.database = mongoDBConnection.database;
     }
 
     public find<T>(collection: string, filter: Object): Promise<T[]> {

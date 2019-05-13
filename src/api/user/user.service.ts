@@ -1,11 +1,14 @@
-import {inject, injectable} from 'inversify';
-import TYPES from "../../utils/constant/types";
+import {inject} from 'inversify';
 import {MongoDBClient} from "../../utils/mongodb/client";
 import {User} from "./user";
+import {fluentProvide} from 'inversify-binding-decorators';
 
-@injectable()
+@fluentProvide(UserService).inSingletonScope().done()
 export class UserService {
-    @inject(TYPES.MongoDBClient) mongoClient: MongoDBClient;
+    constructor(@inject(MongoDBClient) private mongoClient: MongoDBClient) {
+        console.log('UserService constructor');
+    }
+
     public getUsers(): Promise<User[]> {
         return this.mongoClient.find<User>('user', {});
     }

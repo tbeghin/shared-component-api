@@ -1,9 +1,9 @@
 import {BaseHttpController, controller, httpGet} from "inversify-express-utils";
 import {ApiOperationGet, ApiPath, SwaggerDefinitionConstant} from "swagger-express-ts";
 import {inject} from "inversify";
-import TYPES from "../../utils/constant/types";
 import {UserService} from "./user.service";
 import {User} from "./user";
+import {AuthenticationMiddleware} from "../../utils/middleware/authentication.middleware";
 
 @ApiPath({
     path: "/user",
@@ -11,8 +11,11 @@ import {User} from "./user";
     security: {basicAuth: []}
 })
 @controller('/')
-export class AuthenticationController extends BaseHttpController {
-    @inject(TYPES.UserService) private userService: UserService;
+export class UserController extends BaseHttpController {
+    constructor(@inject(UserService) private userService: UserService){
+        super();
+        console.log('UserController constructor');
+    }
 
     @ApiOperationGet({
         summary: "Get all user",
@@ -23,7 +26,7 @@ export class AuthenticationController extends BaseHttpController {
             apiKeyHeader: []
         }
     })
-    @httpGet('/', TYPES.AuthenticationMiddleware)
+    @httpGet('/', AuthenticationMiddleware)
     public get(): Promise<Array<User>> {
         return this.userService.getUsers();
     }
