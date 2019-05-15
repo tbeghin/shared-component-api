@@ -4,8 +4,7 @@
   "description": "Api de composant commun",
   "main": "server.ts",
   "scripts": {
-    "clean": "echo \"Cleaning...\" && gulp clean",
-    "build": "echo \"Building...\" && npm run clean && tsc -p tsconfig.json && echo \"Application is building in directory built.\"",
+    "build": "echo \"Building...\" && tsc -p tsconfig.json && echo \"Application is building in directory built.\"",
     "test": "echo \"Testing...\" && nyc mocha",
     "dev": "echo \"Developing...\" && nodemon",
     "start": "echo \"Starting application...\" && npm run build && node built/index.js"
@@ -18,10 +17,10 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@types/jsonwebtoken": "^8.3.2",
     "body-parser": "^1.19.0",
     "errorhandler": "^1.5.0",
     "express": "^4.16.4",
+    "gulp": "^4.0.2",
     "inversify": "^5.0.1",
     "inversify-binding-decorators": "^4.0.0",
     "inversify-express-utils": "^6.3.2",
@@ -39,6 +38,7 @@
     "@types/body-parser": "^1.17.0",
     "@types/errorhandler": "^0.0.32",
     "@types/express": "^4.16.1",
+    "@types/jsonwebtoken": "^8.3.2",
     "@types/mongodb": "^3.1.26",
     "@types/morgan": "^1.7.35"
   },
