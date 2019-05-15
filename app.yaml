@@ -1,9 +1,3 @@
 steps:
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['install']
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'build']
-artifacts:
-  objects:
-    location: 'gs://shared-component-api'
-    paths: ['lib']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy']
