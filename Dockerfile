@@ -1,3 +1,3 @@
 FROM node
-COPY . /
-CMD ["node lib/server.js"]
+COPY . .
+CMD ["npm start"]
