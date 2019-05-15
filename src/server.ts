@@ -33,5 +33,5 @@ server.setConfig(ConfigurationServer);
 server.setErrorConfig((app) => app.use(errorHandler()));
 
 let app = server.build();
-app.listen(3000);
+app.listen(8080);
 console.log('Server up');
