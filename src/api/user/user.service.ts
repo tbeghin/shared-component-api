@@ -6,12 +6,10 @@ import {fluentProvide} from 'inversify-binding-decorators';
 @fluentProvide(UserService).inSingletonScope().done()
 export class UserService {
     constructor(@inject(MongoDBClient) private mongoClient: MongoDBClient) {
-        console.log('UserService constructor');
     }
 
-    public getUsers(): Promise<User[]> {
-        console.log('getUsers');
-        return this.mongoClient.find<User>('users', {});
+    public getUsers(filter: any = {}): Promise<User[]> {
+        return this.mongoClient.find<User>('users', filter);
     }
 
     public getUser(id: string): Promise<User> {

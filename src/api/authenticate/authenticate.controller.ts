@@ -4,17 +4,16 @@ import {inject} from "inversify";
 import {AuthenticateService} from "./authenticate.service";
 import {Authenticate} from "./authenticate";
 import JsonResult from "inversify-express-utils/dts/results/JsonResult";
+import {User} from "../user/user";
 
 @ApiPath({
     path: "/authenticate",
-    name: "Authenticate",
-    security: {basicAuth: []}
+    name: "Authenticate"
 })
 @controller('/authenticate')
 export class AuthenticateController extends BaseHttpController {
     constructor(@inject(AuthenticateService) private authenticateService: AuthenticateService) {
         super();
-        console.log('AuthenticateController constructor');
     }
 
     @ApiOperationPost({
@@ -25,13 +24,20 @@ export class AuthenticateController extends BaseHttpController {
         },
         responses: {
             200: {description: "Success", type: SwaggerDefinitionConstant.Response.Type.OBJECT, model: "User"}
-        },
-        security: {
-            apiKeyHeader: []
         }
     })
     @httpPost('/')
     public async post(@requestBody() request: Authenticate): Promise<JsonResult> {
-        return this.json(await this.authenticateService.authenticate(request));
+        return this.authenticateService.authenticate(request).then(
+            (user: User) => {
+                if(!!user) {
+                    return this.json(user)
+                }
+                else {
+                    return this.json('unauthorized', 401)
+                }
+            },
+            (error: any) => this.json(error, 500)
+        );
     }
 }

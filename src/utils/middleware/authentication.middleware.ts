@@ -1,4 +1,4 @@
-import {BaseMiddleware} from "inversify-express-utils";
+import {BaseMiddleware, next} from "inversify-express-utils";
 import {inject} from "inversify";
 import {NextFunction, Request, Response} from "express";
 import {AuthenticateService} from "../../api/authenticate/authenticate.service";
@@ -8,7 +8,6 @@ import {fluentProvide} from 'inversify-binding-decorators';
 export class AuthenticationMiddleware extends BaseMiddleware {
     constructor(@inject(AuthenticateService) private authenticateService: AuthenticateService) {
         super();
-        console.log('AuthenticationMiddleware constructor');
     }
 
     public handler(
@@ -16,11 +15,11 @@ export class AuthenticationMiddleware extends BaseMiddleware {
         res: Response,
         next: NextFunction
     ) {
-        const token = req.header("Authorization");
-        if (this.authenticateService.verifyAuth(token)) {
-            next();
-        } else {
-            throw new Error();
-        }
+        let token = req.header("Authorization");
+        token = token.split(' ')[1];
+        this.authenticateService.verifyAuth(token).then(
+            () => next(),
+            (err: any) => next(err)
+        );
     }
 }

@@ -8,7 +8,6 @@ export class MongoDBClient {
     private database: Promise<Db>;
 
     constructor(@inject(MongoDBConnection) mongoDBConnection: MongoDBConnection) {
-        console.log('MongoDBClient constructor');
         this.database = mongoDBConnection.database;
     }
 

@@ -34,3 +34,4 @@ server.setErrorConfig((app) => app.use(errorHandler()));
 
 let app = server.build();
 app.listen(3000);
+console.log('Server up');

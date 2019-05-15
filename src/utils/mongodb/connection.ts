@@ -6,7 +6,6 @@ export class MongoDBConnection {
     public database: Promise<Db>;
 
     constructor() {
-        console.log('MongoDBConnection constructor');
         this.database = this.connect('mongodb://localhost:27017', 'test');
     }
 
