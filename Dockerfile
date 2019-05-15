@@ -1,3 +1,3 @@
 FROM node
-COPY . /lib
+COPY . /
 CMD ["node lib/server.js"]
