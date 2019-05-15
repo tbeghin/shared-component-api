@@ -1,3 +1,3 @@
 FROM node
 COPY . /lib
-CMD ["/quickstart.sh"]
+CMD ["node lib/server.js"]
