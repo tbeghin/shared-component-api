@@ -20,7 +20,7 @@
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "built"
+    "outDir": "lib"
   },
   "exclude": [
     "node_modules"
