@@ -10,11 +10,7 @@
       "express",
       "inversify",
       "inversify-express-utils",
-      "reflect-metadata",
-      "mocha",
-      "sinon",
-      "lodash",
-      "chai"
+      "reflect-metadata"
     ],
     "module": "commonjs",
     "moduleResolution": "node",

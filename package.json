@@ -7,7 +7,7 @@
     "build": "echo \"Building...\" && tsc -p tsconfig.json && echo \"Application is building in directory built.\"",
     "test": "echo \"Testing...\" && nyc mocha",
     "dev": "echo \"Developing...\" && nodemon",
-    "start": "echo \"Starting application...\" && npm run build && node built/index.js"
+    "start": "echo \"Starting application...\" && npm run build && node built/server.js"
   },
   "repository": {
     "url": "https://github.com/...",
