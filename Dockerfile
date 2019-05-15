@@ -1,3 +1,3 @@
 FROM node
-COPY . .
-CMD ["npm start"]
+COPY . ./shared-component-api/
+CMD cd shared-component-api && npm start
