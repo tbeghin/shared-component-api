@@ -4,10 +4,10 @@
   "description": "Api de composant commun",
   "main": "server.ts",
   "scripts": {
-    "build": "echo \"Building...\" && tsc -p tsconfig.json && echo \"Application is building in directory built.\"",
+    "gcp-build": "echo \"Building...\" && tsc -p tsconfig.json && echo \"Application is building in directory built.\"",
     "test": "echo \"Testing...\" && nyc mocha",
     "dev": "echo \"Developing...\" && nodemon",
-    "start": "echo \"Starting application...\" && npm run build && node built/server.js"
+    "start": "echo \"Starting application...\" && npm run gcp-build && node built/server.js"
   },
   "repository": {
     "url": "https://github.com/...",
