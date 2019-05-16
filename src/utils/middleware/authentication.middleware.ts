@@ -16,10 +16,10 @@ export class AuthenticationMiddleware extends BaseMiddleware {
         next: NextFunction
     ) {
         let token = req.header("Authorization");
-        token = token.split(' ')[1];
+        token = !!token ? token.split(' ')[1] : null;
         this.authenticateService.verifyAuth(token).then(
             () => next(),
-            (err: any) => next(err)
+            (err: any) => next({statusCode: 401, error: err})
         );
     }
 }

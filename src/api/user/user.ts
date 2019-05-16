@@ -26,13 +26,13 @@ export class User {
     @ApiModelProperty( {
         type: "string",
         description : "Password" ,
-        required : true
+        required : false
     } )
-    password : string;
+    password? : string;
     @ApiModelProperty( {
         type: "string",
         description : "authentication token" ,
         required : false
     } )
-    token : string;
+    token? : string;
 }

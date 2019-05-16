@@ -6,8 +6,10 @@ export class MongoDBConnection {
     public database: Promise<Db>;
 
     constructor() {
-        this.database = this.connect('mongodb://localhost:27017', 'test');
+        const uri = 'mongodb+srv://shared-component-admin:O0mlgiKqZK2IxJQB@shared-component-db-kfjxa.gcp.mongodb.net/teacher-tool?retryWrites=true';
+        this.database = this.connect(uri, 'teacher-tool');
     }
+
 
     private connect(connStr: string, dbName: string): Promise<Db> {
         return new Promise<Db>((resolve, reject) => {
